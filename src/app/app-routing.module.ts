@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { WorkspaceComponent } from './home/workspace/workspace.component';
-
 const routes: Routes = [
   {
     path: '',
@@ -23,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'workspace',
-    component: WorkspaceComponent
+    loadChildren: () => import('./home/workspace/workspace.module').then(m => m.WorkspaceModule)
   }
 ];
 
