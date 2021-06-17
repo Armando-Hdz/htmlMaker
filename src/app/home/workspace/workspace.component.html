@@ -1,9 +1,18 @@
 <h1>WORK SPACE</h1>
 
 <br>
+
+<ckeditor
+  [(ngModel)]="content"
+  [config]="{uiColor: '#6D6D6D'}">
+</ckeditor>
 <br>
 
-<ckeditor></ckeditor>
+{{content}}
+
+<div class="text-center">
+  <button class="btn btn-dark" (click)="downloadHtml()">Download HTML</button>
+</div>
 
 <br>
 <br>

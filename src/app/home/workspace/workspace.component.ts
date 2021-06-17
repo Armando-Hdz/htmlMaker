@@ -1,29 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+
+import { CKEditorComponent } from 'ng2-ckeditor';
 
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
   styleUrls: ['./workspace.component.scss'],
-  template: `
-  <ckeditor
-    [(ngModel)]="ckeditorContent"
-    [config]="{ uiColor: '#99000' }"
-    [readonly]="false"
-    (change)="onChange($event)"
-    (editorChange)="onEditorChange($event)" <!-- CKEditor change event -->
-    (ready)="onReady($event)"
-    (focus)="onFocus($event)"
-    (blur)="onBlur($event)"
-    (contentDom)="onContentDom($event)"
-    (fileUploadRequest)="onFileUploadRequest($event)"
-    (fileUploadResponse)="onFileUploadResponse($event)"
-    (paste)="onPaste($event)"
-    (drop)="onDrop($event)"
-    debounce="500">
-  </ckeditor>
-  `,
 })
 export class WorkspaceComponent{
+  content: string;
+  @ViewChild(CKEditorComponent) ckeditor: CKEditorComponent;
+
   ngAfterViewChecked(){
     CKEDITOR.editorConfig = function( config ) {
       config.toolbarGroups = [
@@ -44,5 +31,30 @@ export class WorkspaceComponent{
         { name: 'about', groups: [ 'about' ] }
       ];
     }
+  }
+
+  downloadHtml(){
+    const tablaNombre = 'meail.html';
+    const htmlContent = this.content;
+    const body = `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+    </head>
+    <body>
+      ${htmlContent}
+    </body>
+    </html>`;
+    this.downloadInnerHtml(tablaNombre, body, null);
+  }
+
+  downloadInnerHtml(filename: string, innerHtml: string, mimeType: string) {
+    const link = document.createElement('a');
+    mimeType = mimeType || 'text/plain';
+    link.setAttribute('download', filename);
+    link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(innerHtml));
+    link.click();
   }
 }

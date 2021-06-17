@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { WorkspaceRoutingModule } from './workspace-routing.module';
 import { WorkspaceComponent } from './workspace.component';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
   imports: [
     CommonModule,
     WorkspaceRoutingModule,
+    FormsModule,
     CKEditorModule
   ]
 })
