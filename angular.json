@@ -136,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "HTMLMAKER"
+  "defaultProject": "HTMLMAKER",
+  "cli": {
+    "analytics": "25fc5f4d-37cf-4351-9379-980ea1df017b"
+  }
 }
